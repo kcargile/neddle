@@ -65,7 +65,7 @@ namespace Neddle.Extensions
         /// <param name="listToCompare">The list to compare.</param>
         /// <param name="predicate">The predicate to calculate the sort key.</param>
         /// <returns><c>true</c> if the lists are equivalent; otherwise, false.</returns>
-        public static bool Equals<TU, TKey>(this IEnumerable<TU> source, IList<TU> listToCompare, Func<TU, TKey> predicate) where TU : class
+        public static bool Equals<TU, TKey>(this IEnumerable<TU> source, IEnumerable<TU> listToCompare, Func<TU, TKey> predicate) where TU : class
         {
             return ((null == source || null == listToCompare) ? source == listToCompare : ((source.Equals(listToCompare)) | (source.OrderBy(predicate).SequenceEqual(listToCompare.OrderBy(predicate)))));
         }
