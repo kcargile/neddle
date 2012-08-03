@@ -66,6 +66,7 @@
     <Compile Include="Caching\NullCacheProvider.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="NeddleObject.cs" />
     <Compile Include="Properties\Messages.Designer.cs">
       <AutoGen>True</AutoGen>

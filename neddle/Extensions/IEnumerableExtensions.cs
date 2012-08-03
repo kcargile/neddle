@@ -61,13 +61,13 @@ namespace Neddle.Extensions
         /// </summary>
         /// <typeparam name="TU">The type of the items in the list.</typeparam>
         /// <typeparam name="TKey">The type of the key for sorting the list.</typeparam>
-        /// <param name="list1">The source.</param>
-        /// <param name="list2">The list to compare.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="listToCompare">The list to compare.</param>
         /// <param name="predicate">The predicate to calculate the sort key.</param>
         /// <returns><c>true</c> if the lists are equivalent; otherwise, false.</returns>
-        public static bool Equals<TU, TKey>(IList<TU> list1, IList<TU> list2, Func<TU, TKey> predicate) where TU : class
+        public static bool Equals<TU, TKey>(this IEnumerable<TU> source, IList<TU> listToCompare, Func<TU, TKey> predicate) where TU : class
         {
-            return ((null == list1 || null == list2) ? list1 == list2 : ((list1.Equals(list2)) | (list1.OrderBy(predicate).SequenceEqual(list2.OrderBy(predicate)))));
+            return ((null == source || null == listToCompare) ? source == listToCompare : ((source.Equals(listToCompare)) | (source.OrderBy(predicate).SequenceEqual(listToCompare.OrderBy(predicate)))));
         }
     }
 }
