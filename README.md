@@ -1,3 +1,4 @@
+# About the Project
 Neddle is an open source, mobile ready, SCORM compliant learning management system (LMS) built on the .NET platform using C#. Neddle was created to address the absence of a truly high-quality, commercial grade LMS in the OSS community. 
 
 The project has several goals:
@@ -16,3 +17,6 @@ The project has several goals:
 * Provide tight integration with various platform products and LOB systems; including content management systems, shopping cart applications, customer relationship management tools, and merchant gateway services.
 * Feel good about giving something useful to the OSS community.
 * **Have fun and learn.**
+ 
+# How Can I Help?
+If you're a C# or OO JavaScript expert or have experience building or extending LMS platforms or SCORM tools and would like to help, please drop us me line. _I also deperately need someone to help with identity work, IA/design/UX work for the product itself, and design and production for the official project website. If you're interested, let me know._
