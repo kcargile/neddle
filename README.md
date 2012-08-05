@@ -19,4 +19,4 @@ The project has several goals:
 * **Have fun and learn.**
  
 # How Can I Help?
-If you're a C# or OO JavaScript expert or have experience building or extending LMS platforms or SCORM tools and would like to help, please drop us me line. _I also deperately need someone to help with identity work, IA/design/UX work for the product itself, and design and production for the official project website. If you're interested, let me know._
+If you're a C# or OO JavaScript expert or have experience building or extending LMS platforms or SCORM tools and would like to help, please contact me. _I also deperately need someone to help with identity work, UX and creative for the product itself, and design and production of the official project website. If you can help, please let me know._
