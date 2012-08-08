@@ -15,6 +15,12 @@ namespace Neddle
     public abstract class NeddleObject<T> : IValidatable where T : NeddleObject<T>
     {
         /// <summary>
+        /// Default created by username used for non-interactive operations.
+        /// </summary>
+        [XmlIgnore]
+        internal const string DefaultCreatedByUserName = "SYSTEM";
+
+        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         /// <value>
