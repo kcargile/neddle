@@ -14,7 +14,8 @@ The project has several goals:
 * Provide workable options for use in shared and cloud hosting environments.
 * Provide workable options for use with emerging cloud technologies, for example cloud-based NOSQL data stores.
 * Provide tight integration with various platform products and LOB systems; including content management systems, shopping cart applications, customer relationship management tools, and merchant gateway services.
-* Feel good about giving something useful to the OSS community.
-* Have fun and learn.
+ 
+---
+Copyright, 2010-2012, Cargile Technology Group, LLC
 
-There are other longer term goals such as developing a solid installation package, adding mobile support, and possibly adding support for various cloud database platforms. We're also very much interested in eating our own dog food. Once a RC is ready, we will self-hosting training on all aspects of system use at the official project website.
+Released under the LGPL license.
