@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,7 +65,12 @@
     <Compile Include="Caching\ICacheProvider.cs" />
     <Compile Include="Caching\MemCachedCacheProvider.cs" />
     <Compile Include="Caching\NullCacheProvider.cs" />
+    <Compile Include="Chapter.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="Data\CoreInterceptor.cs" />
+    <Compile Include="Data\ForeignKeyConvention.cs" />
+    <Compile Include="Data\SessionConfiguration.cs" />
+    <Compile Include="Data\SessionManager.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="NeddleObject.cs" />
@@ -77,12 +83,12 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Taxonomy\Tag.cs" />
     <Compile Include="Web\Services\CachedService.cs" />
     <Compile Include="Web\Services\Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Compression\.empty" />
-    <None Include="Data\.empty" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
