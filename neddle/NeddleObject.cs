@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
 using NHibernate.Classic;
@@ -37,7 +38,20 @@ namespace Neddle
         /// The create date.
         /// </value>
         [Required]
-        public virtual DateTime CreateDate { get; set; }
+        [XmlAttribute(AttributeName = "createdDate")]
+        public virtual DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets username of the user who created this instance.
+        /// </summary>
+        /// <value>
+        /// The username.
+        /// </value>
+        [Required]
+        [StringLength(50)]
+        [DataMember]
+        [XmlAttribute(AttributeName = "createdBy")]
+        public virtual string CreatedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the modified date.
@@ -46,14 +60,29 @@ namespace Neddle
         /// The modified date.
         /// </value>
         [Required]
+        [DataMember]
+        [XmlAttribute(AttributeName = "modifedDate")]
         public virtual DateTime ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets username of the user who last modified this instance.
+        /// </summary>
+        /// <value>
+        /// The username.
+        /// </value>
+        [Required]
+        [StringLength(50)]
+        [DataMember]
+        [XmlAttribute(AttributeName = "modifedBy")]
+        public virtual string ModifiedBy { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NeddleObject&lt;T&gt;"/> class.
         /// </summary>
         protected NeddleObject()
         {
-            CreateDate = ModifiedDate = DateTime.Now;
+            CreatedDate = ModifiedDate = DateTime.Now;
+            CreatedBy = ModifiedBy = DefaultCreatedByUserName;
         }
 
         /// <summary>
@@ -108,7 +137,7 @@ namespace Neddle
 
             return
                 Id == obj.Id &&
-                CreateDate.ApproximatelyEqual(obj.CreateDate) &&
+                CreatedDate.ApproximatelyEqual(obj.CreatedDate) &&
                 ModifiedDate.ApproximatelyEqual(obj.ModifiedDate);
         }
 
