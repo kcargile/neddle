@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using Neddle.Extensions;
 using NHibernate.Classic;
 using System.ComponentModel.DataAnnotations;
@@ -14,22 +15,20 @@ namespace Neddle
     public abstract class NeddleObject<T> : IValidatable where T : NeddleObject<T>
     {
         /// <summary>
+        /// Default created by username used for non-interactive operations.
+        /// </summary>
+        [XmlIgnore]
+        internal const string DefaultCreatedByUserName = "SYSTEM";
+
+        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         /// <value>
         /// The id.
         /// </value>
         [Required]
+        [XmlAttribute(AttributeName = "id")]
         public virtual int Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets the row version.
-        /// </summary>
-        /// <value>
-        /// The row version.
-        /// </value>
-        [Required]
-        public virtual DateTime RowVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the create date.
@@ -109,7 +108,6 @@ namespace Neddle
 
             return
                 Id == obj.Id &&
-                RowVersion == obj.RowVersion &&
                 CreateDate.ApproximatelyEqual(obj.CreateDate) &&
                 ModifiedDate.ApproximatelyEqual(obj.ModifiedDate);
         }

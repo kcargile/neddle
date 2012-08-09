@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neddle", "neddle.csproj", "{5CA79F65-8539-4C41-B724-F5DFB8337749}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neddle", "neddle\neddle.csproj", "{5CA79F65-8539-4C41-B724-F5DFB8337749}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2E40FE49-3AE2-4120-9216-CBA193922BFC}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2E40FE
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neddle.tests", "..\neddle.tests\neddle.tests.csproj", "{DD711F76-EFAE-4B3B-BA3B-31B3EC64565C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neddle.tests", "neddle.tests\neddle.tests.csproj", "{DD711F76-EFAE-4B3B-BA3B-31B3EC64565C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
