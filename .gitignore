@@ -6,5 +6,5 @@ _ReSharper*
 *.user
 *.suo
 *.idea
-packages*
+packages
 *.dotCover
