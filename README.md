@@ -14,7 +14,9 @@ The project has several goals:
 * Provide workable options for use in shared and cloud hosting environments.
 * Provide workable options for use with emerging cloud technologies, for example cloud-based NOSQL data stores.
 * Provide tight integration with various platform products and LOB systems; including content management systems, shopping cart applications, customer relationship management tools, and merchant gateway services.
- 
+
+Visit the official project website at [http://www.neddle.org](http://www.neddle.org).
+
 ---
 Copyright, 2010-2012, Cargile Technology Group, LLC
 
