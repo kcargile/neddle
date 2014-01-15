@@ -1,9 +1,8 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Neddle.Tests
 {
-    [TestFixture]
     public class CourseFixture : NeddleObjectFixture<Course>
     {
         internal override Course MockEntity
@@ -11,15 +10,16 @@ namespace Neddle.Tests
             get { throw new NotImplementedException(); }
         }
 
-        [Test]
+        [Fact]
         public override void Equals()
         {
-            Assert.Fail();
+            
         }
 
+        [Fact]
         public override void Validate()
         {
-            Assert.Fail();
+            
         }
     }
 }

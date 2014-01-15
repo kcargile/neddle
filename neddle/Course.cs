@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using Neddle.Extensions;
 using Neddle.Taxonomy;
 using Neddle.Web.Services;
 
@@ -173,8 +174,62 @@ namespace Neddle
         public Course()
         {
             Tags = new List<Tag>();
+            Chapters = new List<Chapter>();
             Language = CultureInfo.CurrentCulture;
             Version = 1;
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj is Course)
+            {
+                return Equals(obj as Course);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(Course obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            return
+                base.Equals(obj) &&
+                Chapters.Equals(obj.Chapters) &&
+                Description == obj.Description &&
+                Language.NullSafeEquals(obj.Language) &&
+                Name == obj.Name &&
+                ShortName == obj.ShortName &&
+                Tags.Equals(obj.Tags) &&
+                ThumbnailImage.NullSafeEquals(obj.ThumbnailImage) &&
+                Version == obj.Version;
         }
     }
 }

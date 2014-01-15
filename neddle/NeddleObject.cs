@@ -93,10 +93,7 @@ namespace Neddle
         /// </returns>
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return Id.GetHashCode();
-            }
+            return this.CalculateHash();
         }
 
         /// <summary>
