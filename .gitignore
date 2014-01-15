@@ -1,0 +1,10 @@
+.DS_Store*
+Thumbs.db
+bin
+obj
+_ReSharper*
+*.user
+*.suo
+*.idea
+packages
+*.dotCover
