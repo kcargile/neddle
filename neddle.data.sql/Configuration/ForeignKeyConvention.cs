@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentNHibernate;
 
-namespace Neddle.Data
+namespace Neddle.Data.Sql.Configuration
 {
     /// <summary>
     /// Represents the foreign key convention used in persistent storage.

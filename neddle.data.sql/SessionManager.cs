@@ -2,8 +2,9 @@
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Bytecode;
+using Neddle.Data.Sql.Configuration;
 
-namespace Neddle.Data
+namespace Neddle.Data.Sql
 {
     /// <summary>
     /// Class for managing connections to persistent storage.

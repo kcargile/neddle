@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.Xml.Serialization;
 using Neddle.Extensions;
 using Neddle.Taxonomy;
-using Neddle.Web.Services;
 
 namespace Neddle
 {
@@ -52,7 +52,7 @@ namespace Neddle
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "course")]
-    [DataContract(Namespace = Service.DefaultNamespace)]
+    [DataContract(Namespace = DefaultNamespace)]
     public class Course : NeddleObject<Course>
     {
         /// <summary>
@@ -64,7 +64,7 @@ namespace Neddle
         [Required]
         [DataMember]
         [XmlAttribute(AttributeName = "name")]
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the short name, e.g. "ENG101".
@@ -143,7 +143,7 @@ namespace Neddle
         public List<Chapter> Chapters { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Neddle.Chapter"/> at the specified index.
+        /// Gets or sets the <see cref="Chapter"/> at the specified index.
         /// </summary>
         [XmlIgnore]
         public Chapter this[int index]
@@ -169,10 +169,21 @@ namespace Neddle
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Course"/> class.
+        /// Initializes a new instance of the <see cref="Course" /> class.
         /// </summary>
-        public Course()
+        /// <param name="name">The name.</param>
+        /// <param name="shortName">The short name.</param>
+        /// <param name="description">The description.</param>
+        public Course(string name, string shortName, string description)
         {
+            name.CheckNullOrEmpty("name");
+            shortName.CheckNullOrEmpty("shortName");
+            description.CheckNullOrEmpty("description");
+
+            Name = name;
+            ShortName = name;
+            Description = description;
+
             Tags = new List<Tag>();
             Chapters = new List<Chapter>();
             Language = CultureInfo.CurrentCulture;
@@ -180,25 +191,14 @@ namespace Neddle
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Returns a hash code for this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override bool Equals(object obj)
+        public override int GetHashCode()
         {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (obj is Course)
-            {
-                return Equals(obj as Course);
-            }
-
-            return false;
+            return base.GetHashCode();
         }
 
         /// <summary>

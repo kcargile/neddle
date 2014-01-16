@@ -1,13 +1,12 @@
 ﻿using System;
 using Neddle.Extensions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Neddle.Tests.Extensions
 {
-    [TestFixture]
     public class StringExtensionsFixture
     {
-        [Test]
+        [Fact]
         public void CheckNullOrEmpty()
         {
             string s1 = string.Empty;
@@ -23,13 +22,13 @@ namespace Neddle.Tests.Extensions
             Assert.DoesNotThrow(() => s2.CheckNullOrEmpty());
         }
 
-        [Test]
+        [Fact]
         public void Md5Hash()
         {
             // TODO: KLC fix this test
 
             const string stringToHash = "someimportantstring";
-            Assert.AreNotEqual(stringToHash, stringToHash.Md5Hash());
+            Assert.NotEqual(stringToHash, stringToHash.Md5Hash());
         }
     }
 }

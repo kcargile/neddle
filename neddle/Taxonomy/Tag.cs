@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using Neddle.Web.Services;
 
 namespace Neddle.Taxonomy
 {
@@ -10,7 +9,7 @@ namespace Neddle.Taxonomy
     /// </summary>
     [Serializable]
     [XmlRoot(ElementName = "tag")]
-    [DataContract(Namespace = Service.DefaultNamespace)]
+    [DataContract(Namespace = DefaultNamespace)]
     public class Tag : NeddleObject<Tag>
     {
         /// <summary>
@@ -31,27 +30,7 @@ namespace Neddle.Taxonomy
         /// </returns>
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return Id.GetHashCode();
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Tag))
-            {
-                return false;
-            }
-
-            return Equals(obj as Tag);
+            return base.GetHashCode();
         }
 
         /// <summary>

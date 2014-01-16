@@ -3,7 +3,7 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Conventions.Helpers;
 using Neddle.Extensions;
 
-namespace Neddle.Data
+namespace Neddle.Data.Sql.Configuration
 {
     /// <summary>
     /// Domain entity auto-mapping configuration.

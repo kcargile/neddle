@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
-using NHibernate.Classic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Neddle
@@ -13,8 +12,13 @@ namespace Neddle
     /// The base object for all databound Neddle entities.
     /// </summary>
     /// <typeparam name="T">Type of the entity.</typeparam>
-    public abstract class NeddleObject<T> : IValidatable where T : NeddleObject<T>
+    public abstract class NeddleObject<T> where T : NeddleObject<T>
     {
+        /// <summary>
+        /// Default service namespace.
+        /// </summary>
+        public const string DefaultNamespace = "http://www.neddle.org/2012/08";
+
         /// <summary>
         /// Default created by username used for non-interactive operations.
         /// </summary>
@@ -29,7 +33,7 @@ namespace Neddle
         /// </value>
         [Required]
         [XmlAttribute(AttributeName = "id")]
-        public virtual int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or sets the create date.
@@ -39,7 +43,7 @@ namespace Neddle
         /// </value>
         [Required]
         [XmlAttribute(AttributeName = "createdDate")]
-        public virtual DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         /// <summary>
         /// Gets or sets username of the user who created this instance.
@@ -51,7 +55,7 @@ namespace Neddle
         [StringLength(50)]
         [DataMember]
         [XmlAttribute(AttributeName = "createdBy")]
-        public virtual string CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the modified date.
@@ -62,7 +66,7 @@ namespace Neddle
         [Required]
         [DataMember]
         [XmlAttribute(AttributeName = "modifedDate")]
-        public virtual DateTime ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
 
         /// <summary>
         /// Gets or sets username of the user who last modified this instance.
@@ -74,7 +78,7 @@ namespace Neddle
         [StringLength(50)]
         [DataMember]
         [XmlAttribute(AttributeName = "modifedBy")]
-        public virtual string ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NeddleObject&lt;T&gt;"/> class.
@@ -153,9 +157,7 @@ namespace Neddle
         }
 
         /// <summary>
-        /// Validate the state of the object before persisting it. If a violation occurs,
-        /// throw a <see cref="T:NHibernate.Classic.ValidationFailure"/>. This method must not change the state of the object
-        /// by side-effect.
+        /// Validates this instance.
         /// </summary>
         public virtual void Validate()
         {

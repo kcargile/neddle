@@ -1,13 +1,12 @@
 ﻿using System;
-using NUnit.Framework;
 using Neddle.Extensions;
+using Xunit;
 
 namespace Neddle.Tests.Extensions
 {
-    [TestFixture]
     public class TypeExtensionsFixture
     {
-        [Test]
+        [Fact]
         public void SubclassOfRawGeneric()
         {
             Assert.True(typeof(Course).IsSubclassOfRawGeneric(typeof(NeddleObject<>)));
