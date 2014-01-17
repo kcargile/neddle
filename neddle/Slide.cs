@@ -15,17 +15,6 @@ namespace Neddle
     public class Slide : NeddleObject<Slide>
     {
         /// <summary>
-        /// Gets or sets the index.
-        /// </summary>
-        /// <value>
-        /// The index.
-        /// </value>
-        [Required]
-        [DataMember]
-        [XmlElement(ElementName = "index")]
-        public int Index { get; set; }
-
-        /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>
@@ -50,13 +39,11 @@ namespace Neddle
         /// Initializes a new instance of the <see cref="Slide" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
-        /// <param name="index">The index.</param>
-        public Slide(string title, int index)
+        public Slide(string title)
         {
             title.CheckNullOrEmpty("title");
 
             Title = title;
-            Index = index;
         }
 
         /// <summary>

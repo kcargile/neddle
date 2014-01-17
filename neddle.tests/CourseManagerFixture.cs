@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using Neddle.Data;
 using Xunit;
@@ -18,7 +19,17 @@ namespace Neddle.Tests
         {
             Course expected = new Course("Test Course", "TST101", "This is a test course.")
                 {
-                    Id = Guid.NewGuid()
+                    Id = Guid.NewGuid(),
+                    Chapters = new List<Chapter>
+                        {
+                            new Chapter("Test Chapter")
+                                {
+                                    Slides = new List<Slide>
+                                        {
+                                           new Slide("Test Slide")
+                                        }
+                                }
+                        }
                 };
 
             Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
@@ -45,6 +56,15 @@ namespace Neddle.Tests
 
             Assert.Null(actual);
             dataProvider.Verify(o => o.Load(courseId), Times.Once);
+        }
+
+        [Fact]
+        public void SaveCourseWithNullCourseThrows()
+        {
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            CourseManager manager = new CourseManager(dataProvider.Object);
+
+            Assert.Throws<ArgumentNullException>(() => manager.SaveCourse(null));
         }
     }
 }

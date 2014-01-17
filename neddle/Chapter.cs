@@ -12,17 +12,6 @@ namespace Neddle
     public class Chapter : NeddleObject<Chapter>
     {
         /// <summary>
-        /// Gets or sets the index.
-        /// </summary>
-        /// <value>
-        /// The index.
-        /// </value>
-        [Required]
-        [DataMember]
-        [XmlElement(ElementName = "index")]
-        public int Index { get; set; }
-
-        /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>
@@ -74,13 +63,11 @@ namespace Neddle
         /// Initializes a new instance of the <see cref="Chapter" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
-        /// <param name="index">The index.</param>
-        public Chapter(string title, int index)
+        public Chapter(string title)
         {
             title.CheckNullOrEmpty("title");
 
             Title = title;
-            Index = index;
             Slides = new List<Slide>();
         }
 
@@ -117,7 +104,6 @@ namespace Neddle
             return
                 base.Equals(obj) &&
                 Title == obj.Title &&
-                Index == obj.Index &&
                 Slides.NullSafeEquals(obj.Slides);
         }
     }
