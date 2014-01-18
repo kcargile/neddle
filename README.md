@@ -18,6 +18,6 @@ The project has several goals:
 Visit the official project website at [http://www.neddle.org](http://www.neddle.org).
 
 ---
-Copyright, 2010-2012, Cargile Technology Group, LLC
+Copyright, 2010-2014, Cargile Technology Group, LLC
 
 Released under the LGPL license.
