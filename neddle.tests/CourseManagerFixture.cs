@@ -85,13 +85,13 @@ namespace Neddle.Tests
             };
 
             Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
-            dataProvider.Setup(o => o.SaveCourse(expected)).Returns(expected);
+            dataProvider.Setup(o => o.Save(expected)).Returns(expected);
 
             CourseManager manager = new CourseManager(dataProvider.Object);
             Course actual = manager.SaveCourse(expected);
 
             Assert.Equal(expected, actual);
-            dataProvider.Verify(o => o.SaveCourse(expected), Times.Once());
+            dataProvider.Verify(o => o.Save(expected), Times.Once);
         }
 
         [Fact]
@@ -121,13 +121,57 @@ namespace Neddle.Tests
         [Fact]
         public void DeleteCourseWithValidCourseIdSucceeds()
         {
-            Assert.True(false);
+            Course valid = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.Exists(valid)).Returns(true);
+            dataProvider.Setup(o => o.Delete(valid)).Returns(1);
+
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            int affected = manager.DeleteCourse(valid);
+
+            Assert.Equal(1, affected);
+            dataProvider.Verify(o => o.Exists(valid), Times.Once);
+            dataProvider.Verify(o => o.Delete(valid), Times.Once);
         }
 
         [Fact]
-        public void DeleteCourseWithNonExistentCourseIdThrows()
+        public void DeleteCourseWithNonExistentCourseThrows()
         {
-            Assert.True(false);
+            Course missing = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.Exists(missing)).Returns(false);
+
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            Assert.Throws<NeddleException>(() => manager.DeleteCourse(missing));
+
+            dataProvider.Verify(o => o.Exists(missing), Times.Once);
+            dataProvider.Verify(o => o.Delete(missing), Times.Never);
         }
 
         [Fact]

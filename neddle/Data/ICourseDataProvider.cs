@@ -26,14 +26,14 @@ namespace Neddle.Data
         /// </summary>
         /// <param name="course">The course.</param>
         /// <returns>A reference to the updated course entity.</returns>
-        Course SaveCourse(Course course);
+        Course Save(Course course);
 
         /// <summary>
         /// Deletes the specified <see cref="Course" />.
         /// </summary>
         /// <param name="course">The course.</param>
         /// <returns>Total number of records affected. This may aggregate counts from <see cref="Chapter"/> and <see cref="Slide"/> members.</returns>
-        int DeleteCourse(Course course);
+        int Delete(Course course);
 
         /// <summary>
         /// Determines if the specified course exists in persistent storage.

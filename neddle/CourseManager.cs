@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using log4net;
+using Castle.Core.Logging;
 using Neddle.Data;
-
-// TODO: add logging
 
 namespace Neddle
 {
@@ -13,14 +11,19 @@ namespace Neddle
     public class CourseManager
     {
         private readonly ICourseDataProvider _dataProvider;
+        private ILogger _logger = NullLogger.Instance;
 
         /// <summary>
-        /// Gets or sets the log.
+        /// Gets or sets the logger.
         /// </summary>
         /// <value>
-        /// The log.
+        /// The logger.
         /// </value>
-        public ILog Log { get; set; }
+        public ILogger Logger
+        {
+            get { return _logger; }
+            set { _logger = value; }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CourseManager"/> class.
@@ -53,7 +56,7 @@ namespace Neddle
             Contract.Requires<ArgumentNullException>(course != null);
 
             course.Validate();
-            return _dataProvider.SaveCourse(course);
+            return _dataProvider.Save(course);
         }
 
         /// <summary>
@@ -72,7 +75,7 @@ namespace Neddle
             course.Validate();
             Exists(course, true);
             
-            int affected = _dataProvider.DeleteCourse(course);
+            int affected = _dataProvider.Delete(course);
             if (affected == 0)
             {
                 throw new NeddleException(Resources.Courses.CourseCouldNotBeDeleted, course.Id);
