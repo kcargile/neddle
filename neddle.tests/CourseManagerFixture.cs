@@ -19,18 +19,18 @@ namespace Neddle.Tests
         public void LoadCourseSucceeds()
         {
             Course expected = new Course("Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
                 {
-                    Chapters = new List<Chapter>
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
                         {
-                            new Chapter("Test Chapter")
-                                {
-                                    Slides = new List<Slide>
-                                        {
-                                           new Slide("Test Slide")
-                                        }
-                                }
+                            new Slide("Test Slide")
                         }
-                };
+                    }
+                }
+            };
 
             Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
             dataProvider.Setup(o => o.Load(expected.Id)).Returns(expected);
@@ -119,7 +119,7 @@ namespace Neddle.Tests
         }
 
         [Fact]
-        public void DeleteCourseWithValidCourseIdSucceeds()
+        public void DeleteCourseWithValidCourseSucceeds()
         {
             Course valid = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
             {
@@ -175,7 +175,7 @@ namespace Neddle.Tests
         }
 
         [Fact]
-        public void DeleteCourseWithInvalidCourseIdThrows()
+        public void DeleteCourseWithInvalidCourseThrows()
         {
             Course invalid = new Course(Guid.Empty, "Test Course", "TST101", "This is a test course.")
             {
@@ -199,7 +199,7 @@ namespace Neddle.Tests
         }
 
         [Fact]
-        public void DeleteCourseWithValidCourseFailureThrowsException()
+        public void DeleteCourseFailsWithValidCourseThrows()
         {
             Course valid = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
             {
@@ -224,6 +224,86 @@ namespace Neddle.Tests
 
             dataProvider.Verify(o => o.Exists(valid), Times.Once);
             dataProvider.Verify(o => o.Delete(valid), Times.Once);
+        }
+
+        [Fact]
+        public void ExistsWithMatchingCourseReturnsTrue()
+        {
+            Course expected = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.Exists(expected)).Returns(true);
+            
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            bool exists = manager.Exists(expected);
+
+            Assert.True(exists);
+            dataProvider.Verify(o => o.Exists(expected), Times.Once);
+        }
+
+        [Fact]
+        public void ExistsWithNoMatchingCourseReturnsFalse()
+        {
+            Course expected = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.Exists(expected)).Returns(false);
+
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            bool exists = manager.Exists(expected);
+
+            Assert.False(exists);
+            dataProvider.Verify(o => o.Exists(expected), Times.Once);
+        }
+
+        [Fact]
+        public void ExistsWithNoMatchingCourseThrows()
+        {
+            Course expected = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.Exists(expected)).Returns(false);
+
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            Assert.Throws<NeddleException>(() => manager.Exists(expected, true));
+
+            dataProvider.Verify(o => o.Exists(expected), Times.Once);
         }
     }
 }

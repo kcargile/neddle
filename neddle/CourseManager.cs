@@ -73,6 +73,8 @@ namespace Neddle
         /// </exception>
         public int DeleteCourse(Course course)
         {
+            // TODO: KLC want to add an option here that will allow preservation of slides for reuse in other courses.
+
             Contract.Requires<ArgumentNullException>(course.Id != null);
 
             Logger.DebugFormat(Resources.Courses.CourseDelete, course.Id);
