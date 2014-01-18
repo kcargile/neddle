@@ -233,12 +233,12 @@ namespace Neddle
 
             return
                 base.Equals(obj) &&
-                Chapters.Equals(obj.Chapters) &&
+                Chapters.NullSafeSequenceEquals(obj.Chapters) &&
                 Description == obj.Description &&
                 Language.NullSafeEquals(obj.Language) &&
                 Name == obj.Name &&
                 ShortName == obj.ShortName &&
-                Tags.Equals(obj.Tags) &&
+                Tags.NullSafeSequenceEquals(obj.Tags) &&
                 ThumbnailImage.NullSafeEquals(obj.ThumbnailImage) &&
                 Version == obj.Version;
         }

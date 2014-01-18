@@ -36,14 +36,24 @@ namespace Neddle
         public string Content { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Slide" /> class.
+        /// Initializes a new instance of the <see cref="Slide"/> class.
         /// </summary>
+        /// <param name="id">The identifier.</param>
         /// <param name="title">The title.</param>
-        public Slide(string title)
+        public Slide(Guid id, string title) : base(id)
         {
             title.CheckNullOrEmpty("title");
 
             Title = title;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Slide" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        public Slide(string title) : this(Guid.NewGuid(), title)
+        {
+
         }
 
         /// <summary>

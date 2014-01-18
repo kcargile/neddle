@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
@@ -152,20 +150,6 @@ namespace Neddle
                 Id == obj.Id &&
                 CreatedDate.ApproximatelyEqual(obj.CreatedDate) &&
                 ModifiedDate.ApproximatelyEqual(obj.ModifiedDate);
-        }
-
-        /// <summary>
-        /// Determines whether the specified lists are equal.
-        /// </summary>
-        /// <typeparam name="TU">The concrete type of the entities contained in the lists.</typeparam>
-        /// <param name="list1">A list to compare.</param>
-        /// <param name="list2">Another list to compare.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified lists are equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public static bool Equals<TU>(IList<TU> list1, IList<TU> list2) where TU : NeddleObject<TU>
-        {
-            return ((null == list1 || null == list2) ? list1 == list2 : ((list1.Equals(list2)) | (list1.OrderBy(x => x.Id).SequenceEqual(list2.OrderBy(x => x.Id)))));
         }
 
         /// <summary>

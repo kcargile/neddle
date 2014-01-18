@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -60,15 +61,25 @@ namespace Neddle
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Chapter" /> class.
+        /// Initializes a new instance of the <see cref="Chapter"/> class.
         /// </summary>
+        /// <param name="id">The identifier.</param>
         /// <param name="title">The title.</param>
-        public Chapter(string title)
+        public Chapter(Guid id, string title) : base(id)
         {
             title.CheckNullOrEmpty("title");
 
             Title = title;
             Slides = new List<Slide>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Chapter" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        public Chapter(string title) : this(Guid.NewGuid(), title)
+        {
+
         }
 
         /// <summary>
@@ -104,7 +115,7 @@ namespace Neddle
             return
                 base.Equals(obj) &&
                 Title == obj.Title &&
-                Slides.NullSafeEquals(obj.Slides);
+                Slides.NullSafeSequenceEquals(obj.Slides);
         }
     }
 }

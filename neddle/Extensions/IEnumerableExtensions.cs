@@ -57,17 +57,17 @@ namespace Neddle.Extensions
         }
 
         /// <summary>
-        /// Determines if the two lists are equal.
+        /// Determines whether the specified lists are equal.
         /// </summary>
-        /// <typeparam name="TU">The type of the items in the list.</typeparam>
-        /// <typeparam name="TKey">The type of the key for sorting the list.</typeparam>
-        /// <param name="source">The source.</param>
-        /// <param name="listToCompare">The list to compare.</param>
-        /// <param name="predicate">The predicate to calculate the sort key.</param>
-        /// <returns><c>true</c> if the lists are equivalent; otherwise, false.</returns>
-        public static bool Equals<TU, TKey>(this IEnumerable<TU> source, IEnumerable<TU> listToCompare, Func<TU, TKey> predicate) where TU : class
+        /// <typeparam name="TU">The concrete type of the entities contained in the lists.</typeparam>
+        /// <param name="list1">A list to compare.</param>
+        /// <param name="list2">Another list to compare.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified lists are equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool NullSafeSequenceEquals<TU>(this IEnumerable<TU> list1, IEnumerable<TU> list2) where TU : NeddleObject<TU>
         {
-            return ((null == source || null == listToCompare) ? source == listToCompare : ((source.Equals(listToCompare)) | (source.OrderBy(predicate).SequenceEqual(listToCompare.OrderBy(predicate)))));
+            return ((null == list1 || null == list2) ? list1 == list2 : ((list1.Equals(list2)) | (list1.OrderBy(x => x.Id).SequenceEqual(list2.OrderBy(x => x.Id)))));
         }
     }
 }
