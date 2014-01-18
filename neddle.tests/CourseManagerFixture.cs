@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Moq;
 using Neddle.Data;
 using Xunit;
@@ -19,7 +20,6 @@ namespace Neddle.Tests
         {
             Course expected = new Course("Test Course", "TST101", "This is a test course.")
                 {
-                    Id = Guid.NewGuid(),
                     Chapters = new List<Chapter>
                         {
                             new Chapter("Test Chapter")
@@ -65,6 +65,66 @@ namespace Neddle.Tests
             CourseManager manager = new CourseManager(dataProvider.Object);
 
             Assert.Throws<ArgumentNullException>(() => manager.SaveCourse(null));
+        }
+
+        [Fact]
+        public void SaveCourseWithValidCourseSucceeds()
+        {
+            Course expected = new Course("Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                }
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.SaveCourse(expected)).Returns(expected);
+
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            Course actual = manager.SaveCourse(expected);
+
+            Assert.Equal(expected, actual);
+            dataProvider.Verify(o => o.SaveCourse(expected), Times.Once());
+        }
+
+        [Fact]
+        public void SaveCourseWithInvalidCourseThrows()
+        {
+            Course invalid = new Course("Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+                Name = string.Empty // make invalid
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            CourseManager manager = new CourseManager(dataProvider.Object);
+
+            Assert.Throws<ValidationException>(() => manager.SaveCourse(invalid));
+        }
+
+        [Fact]
+        public void DeleteCourseWithNullCourseThrows()
+        {
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            CourseManager manager = new CourseManager(dataProvider.Object);
+
+            Assert.Throws<ArgumentNullException>(() => manager.DeleteCourse(null));
         }
     }
 }

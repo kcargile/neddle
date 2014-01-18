@@ -33,7 +33,7 @@ namespace Neddle
         /// </value>
         [Required]
         [XmlAttribute(AttributeName = "id")]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// Gets or sets the create date.
@@ -81,10 +81,20 @@ namespace Neddle
         public string ModifiedBy { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NeddleObject&lt;T&gt;"/> class.
+        /// Initializes a new instance of the <see cref="NeddleObject{T}"/> class.
         /// </summary>
-        protected NeddleObject()
+        protected NeddleObject() : this(Guid.NewGuid())
         {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NeddleObject{T}"/> class.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        protected NeddleObject(Guid id)
+        {
+            Id = id;
             CreatedDate = ModifiedDate = DateTime.Now;
             CreatedBy = ModifiedBy = DefaultCreatedByUserName;
         }
@@ -109,7 +119,7 @@ namespace Neddle
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (null == obj || !(obj is T))
+            if (obj == null || !(obj is T))
             {
                 return false;
             }

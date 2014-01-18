@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Security.Cryptography;
 using System.Xml.Serialization;
 using Neddle.Extensions;
 using Neddle.Taxonomy;
@@ -169,12 +168,13 @@ namespace Neddle
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Course" /> class.
+        /// Initializes a new instance of the <see cref="Course"/> class.
         /// </summary>
+        /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
         /// <param name="shortName">The short name.</param>
         /// <param name="description">The description.</param>
-        public Course(string name, string shortName, string description)
+        public Course(Guid id, string name, string shortName, string description) : base(id)
         {
             name.CheckNullOrEmpty("name");
             shortName.CheckNullOrEmpty("shortName");
@@ -188,6 +188,17 @@ namespace Neddle
             Chapters = new List<Chapter>();
             Language = CultureInfo.CurrentCulture;
             Version = 1;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Course" /> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="shortName">The short name.</param>
+        /// <param name="description">The description.</param>
+        public Course(string name, string shortName, string description) : this(Guid.NewGuid(), name, shortName, description)
+        {
+
         }
 
         /// <summary>
