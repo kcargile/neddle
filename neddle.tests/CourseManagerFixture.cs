@@ -197,5 +197,33 @@ namespace Neddle.Tests
 
             Assert.Throws<ValidationException>(() => manager.DeleteCourse(invalid));
         }
+
+        [Fact]
+        public void DeleteCourseWithValidCourseFailureThrowsException()
+        {
+            Course valid = new Course(Guid.NewGuid(), "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+            };
+
+            Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
+            dataProvider.Setup(o => o.Exists(valid)).Returns(true);
+            dataProvider.Setup(o => o.Delete(valid)).Returns(0);
+
+            CourseManager manager = new CourseManager(dataProvider.Object);
+            Assert.Throws<NeddleException>(() => manager.DeleteCourse(valid));
+
+            dataProvider.Verify(o => o.Exists(valid), Times.Once);
+            dataProvider.Verify(o => o.Delete(valid), Times.Once);
+        }
     }
 }

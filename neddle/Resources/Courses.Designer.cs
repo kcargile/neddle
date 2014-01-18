@@ -70,11 +70,74 @@ namespace Neddle.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attempting to delete course having id {0}..
+        /// </summary>
+        internal static string CourseDelete {
+            get {
+                return ResourceManager.GetString("CourseDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Course having id {0} does not exist..
         /// </summary>
         internal static string CourseDoesNotExist {
             get {
                 return ResourceManager.GetString("CourseDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempting to locate course having id {0}..
+        /// </summary>
+        internal static string CourseExists {
+            get {
+                return ResourceManager.GetString("CourseExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Course having id {0} does exists {1}..
+        /// </summary>
+        internal static string CourseExistsResult {
+            get {
+                return ResourceManager.GetString("CourseExistsResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempting to load course having id {0}..
+        /// </summary>
+        internal static string CourseLoad {
+            get {
+                return ResourceManager.GetString("CourseLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CourseManger was initialized with provider of type {0}..
+        /// </summary>
+        internal static string CourseManagerStartup {
+            get {
+                return ResourceManager.GetString("CourseManagerStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempting to save course having id {0}..
+        /// </summary>
+        internal static string CourseSave {
+            get {
+                return ResourceManager.GetString("CourseSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempting to update course having id {0}..
+        /// </summary>
+        internal static string CourseUpdate {
+            get {
+                return ResourceManager.GetString("CourseUpdate", resourceCulture);
             }
         }
     }

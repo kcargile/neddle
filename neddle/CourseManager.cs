@@ -33,6 +33,7 @@ namespace Neddle
         {
             Contract.Requires<ArgumentNullException>(dataProvider != null);
 
+            Logger.DebugFormat(Resources.Courses.CourseManagerStartup, dataProvider.GetType().FullName);
             _dataProvider = dataProvider;
         }
 
@@ -43,6 +44,7 @@ namespace Neddle
         /// <returns>The specified course or null.</returns>
         public Course LoadCourse(Guid id)
         {
+            Logger.DebugFormat(Resources.Courses.CourseLoad, id);
             return _dataProvider.Load(id);
         }
 
@@ -55,6 +57,7 @@ namespace Neddle
         {
             Contract.Requires<ArgumentNullException>(course != null);
 
+            Logger.DebugFormat(Resources.Courses.CourseLoad, course.Id);
             course.Validate();
             return _dataProvider.Save(course);
         }
@@ -72,6 +75,7 @@ namespace Neddle
         {
             Contract.Requires<ArgumentNullException>(course.Id != null);
 
+            Logger.DebugFormat(Resources.Courses.CourseDelete, course.Id);
             course.Validate();
             Exists(course, true);
             
@@ -96,7 +100,10 @@ namespace Neddle
         {
             Contract.Requires<ArgumentNullException>(course != null);
 
+            Logger.DebugFormat(Resources.Courses.CourseLoad, course.Id);
             bool exists = _dataProvider.Exists(course);
+            Logger.DebugFormat(Resources.Courses.CourseExistsResult, course.Id, exists);
+
             if (throwIfNotFound && !exists)
             {
                 throw new NeddleException(Resources.Courses.CourseDoesNotExist, course.Id);

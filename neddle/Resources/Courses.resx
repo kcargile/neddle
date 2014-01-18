@@ -121,8 +121,36 @@
     <value>The Course having id {0} could not be deleted. See the application log for more information.</value>
     <comment>Used for messages and exceptions related to failed course deletion.</comment>
   </data>
+  <data name="CourseDelete" xml:space="preserve">
+    <value>Attempting to delete course having id {0}.</value>
+    <comment>Used for verbose logging.</comment>
+  </data>
   <data name="CourseDoesNotExist" xml:space="preserve">
     <value>The Course having id {0} does not exist.</value>
     <comment>Used for messages and exceptions related to failed course lookups.</comment>
+  </data>
+  <data name="CourseExists" xml:space="preserve">
+    <value>Attempting to locate course having id {0}.</value>
+    <comment>Used for verbose logging.</comment>
+  </data>
+  <data name="CourseExistsResult" xml:space="preserve">
+    <value>Course having id {0} does exists {1}.</value>
+    <comment>Used for verbose logging.</comment>
+  </data>
+  <data name="CourseLoad" xml:space="preserve">
+    <value>Attempting to load course having id {0}.</value>
+    <comment>Used for verbose logging.</comment>
+  </data>
+  <data name="CourseManagerStartup" xml:space="preserve">
+    <value>CourseManger was initialized with provider of type {0}.</value>
+    <comment>Used for verbose logging.</comment>
+  </data>
+  <data name="CourseSave" xml:space="preserve">
+    <value>Attempting to save course having id {0}.</value>
+    <comment>Used for verbose logging.</comment>
+  </data>
+  <data name="CourseUpdate" xml:space="preserve">
+    <value>Attempting to update course having id {0}.</value>
+    <comment>Used for verbose logging.</comment>
   </data>
 </root>
