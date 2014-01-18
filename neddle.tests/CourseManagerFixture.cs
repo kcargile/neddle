@@ -119,12 +119,39 @@ namespace Neddle.Tests
         }
 
         [Fact]
-        public void DeleteCourseWithNullCourseThrows()
+        public void DeleteCourseWithValidCourseIdSucceeds()
         {
+            Assert.True(false);
+        }
+
+        [Fact]
+        public void DeleteCourseWithNonExistentCourseIdThrows()
+        {
+            Assert.True(false);
+        }
+
+        [Fact]
+        public void DeleteCourseWithInvalidCourseIdThrows()
+        {
+            Course invalid = new Course(Guid.Empty, "Test Course", "TST101", "This is a test course.")
+            {
+                Chapters = new List<Chapter>
+                {
+                    new Chapter("Test Chapter")
+                    {
+                        Slides = new List<Slide>
+                        {
+                            new Slide("Test Slide")
+                        }
+                    }
+                },
+                Name = string.Empty // make invalid
+            };
+
             Mock<ICourseDataProvider> dataProvider = new Mock<ICourseDataProvider>();
             CourseManager manager = new CourseManager(dataProvider.Object);
 
-            Assert.Throws<ArgumentNullException>(() => manager.DeleteCourse(null));
+            Assert.Throws<ValidationException>(() => manager.DeleteCourse(invalid));
         }
     }
 }

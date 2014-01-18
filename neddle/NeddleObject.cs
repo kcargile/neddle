@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
 using System.ComponentModel.DataAnnotations;
+using Neddle.Validation;
 
 namespace Neddle
 {
@@ -32,6 +33,7 @@ namespace Neddle
         /// The id.
         /// </value>
         [Required]
+        [CustomValidation(typeof(GuidValidator), "IsNotEmpty")]
         [XmlAttribute(AttributeName = "id")]
         public Guid Id { get; private set; }
 

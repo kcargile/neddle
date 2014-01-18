@@ -3,6 +3,8 @@ using System.Diagnostics.Contracts;
 using log4net;
 using Neddle.Data;
 
+// TODO: add logging
+
 namespace Neddle
 {
     /// <summary>
@@ -55,14 +57,49 @@ namespace Neddle
         }
 
         /// <summary>
-        /// Deletes the specified <see cref="Course"/>.
+        /// Deletes the specified <see cref="Course" />.
         /// </summary>
         /// <param name="course">The course.</param>
-        public void DeleteCourse(Course course)
+        /// <returns>
+        /// Total number of records affected. This may aggregate counts from <see cref="Chapter" /> and <see cref="Slide" /> members.
+        /// </returns>
+        /// <exception cref="Neddle.NeddleException">
+        /// </exception>
+        public int DeleteCourse(Course course)
+        {
+            Contract.Requires<ArgumentNullException>(course.Id != null);
+
+            course.Validate();
+            Exists(course, true);
+            
+            int affected = _dataProvider.DeleteCourse(course);
+            if (affected == 0)
+            {
+                throw new NeddleException(Resources.Courses.CourseCouldNotBeDeleted, course.Id);
+            }
+
+            return affected;
+        }
+
+        /// <summary>
+        /// Determines if the specified course exists in persistent storage.
+        /// </summary>
+        /// <param name="course">The course.</param>
+        /// <param name="throwIfNotFound">if set to <c>true</c> throws a <see cref="NeddleException"/> if not found.</param>
+        /// <returns>
+        ///   <c>true</c> if the course exists; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Exists(Course course, bool throwIfNotFound = false)
         {
             Contract.Requires<ArgumentNullException>(course != null);
 
-            _dataProvider.DeleteCourse(course);
+            bool exists = _dataProvider.Exists(course);
+            if (throwIfNotFound && !exists)
+            {
+                throw new NeddleException(Resources.Courses.CourseDoesNotExist, course.Id);
+            }
+
+            return exists;
         }
     }
 }

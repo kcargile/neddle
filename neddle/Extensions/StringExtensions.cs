@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using Neddle.Properties;
 
 namespace Neddle.Extensions
 {
@@ -34,19 +33,19 @@ namespace Neddle.Extensions
         /// Checks parameter for null and throws <code>ArgumentNullException</code> if null.
         /// </summary>
         /// <param name="param">The string.</param>
-        /// <param name="paramName">The name of the parameter to check.</param>
+        /// <param name="name">The name of the parameter to check.</param>
         /// <exception cref="ArgumentNullException"><b>param</b> was null.</exception>
         /// <exception cref="ArgumentException"><b>param</b> was empty.</exception>
-        public static void CheckNullOrEmpty(this string param, string paramName)
+        public static void CheckNullOrEmpty(this string param, string name)
         {
             if (param == null)
             {
-                throw new ArgumentNullException(paramName);
+                throw new ArgumentNullException(name);
             }
 
             if (param.IsNullOrEmptyTrimmed())
             {
-                throw new ArgumentException(Messages.ex_valueCannotBeEmpty, paramName);
+                throw new ArgumentException(Resources.Validation.ValueCannotBeEmpty, name);
             }
         }
 

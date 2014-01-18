@@ -29,9 +29,17 @@ namespace Neddle.Data
         Course SaveCourse(Course course);
 
         /// <summary>
-        /// Deletes the specified <see cref="Course"/>.
+        /// Deletes the specified <see cref="Course" />.
         /// </summary>
         /// <param name="course">The course.</param>
-        void DeleteCourse(Course course);
+        /// <returns>Total number of records affected. This may aggregate counts from <see cref="Chapter"/> and <see cref="Slide"/> members.</returns>
+        int DeleteCourse(Course course);
+
+        /// <summary>
+        /// Determines if the specified course exists in persistent storage.
+        /// </summary>
+        /// <param name="course">The course.</param>
+        /// <returns><c>true</c> if the course exists; otherwise, <c>false</c>.</returns>
+        bool Exists(Course course);
     }
 }
