@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -177,9 +178,9 @@ namespace Neddle
         /// <param name="description">The description.</param>
         public Course(Guid id, string name, string shortName, string description) : base(id)
         {
-            name.CheckNullOrEmpty("name");
-            shortName.CheckNullOrEmpty("shortName");
-            description.CheckNullOrEmpty("description");
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name));
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(shortName));
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(description));
 
             Name = name;
             ShortName = name;

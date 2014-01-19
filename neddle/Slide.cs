@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using Neddle.Extensions;
 
 namespace Neddle
 {
@@ -51,7 +51,7 @@ namespace Neddle
         /// <param name="title">The title.</param>
         public Slide(Guid id, string title) : base(id)
         {
-            title.CheckNullOrEmpty("title");
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(title));
 
             Title = title;
         }

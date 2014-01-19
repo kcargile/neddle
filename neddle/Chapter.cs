@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -68,7 +69,7 @@ namespace Neddle
         /// <param name="title">The title.</param>
         public Chapter(Guid id, string title) : base(id)
         {
-            title.CheckNullOrEmpty("title");
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(title));
 
             Title = title;
             Slides = new List<Slide>();

@@ -110,7 +110,6 @@
     <Compile Include="NeddleException.cs" />
     <Compile Include="NeddleObject.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Courses.Designer.cs">

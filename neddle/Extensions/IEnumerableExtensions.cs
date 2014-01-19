@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
-
-// TODO: KLC fix check clauses
 
 namespace Neddle.Extensions
 {
@@ -21,8 +20,8 @@ namespace Neddle.Extensions
         /// <returns>A string representation of the list delimeted by <b>seprator</b>.</returns>
         public static string ToString<T>(this IEnumerable<T> obj, string separator) where T : class
         {
-            obj.CheckNull("obj");
-            separator.CheckNullOrEmpty("separator");
+            Contract.Requires<ArgumentNullException>(obj != null);
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(separator));
 
             string[] array = obj.Where(n => n != null).Select(n => n.ToString()).ToArray();
 
@@ -37,8 +36,8 @@ namespace Neddle.Extensions
         /// <returns>A string representation of the list delimeted by <b>seprator</b>.</returns>
         public static string ToString(this IEnumerable obj, string separator)
         {
-            obj.CheckNull("obj");
-            separator.CheckNullOrEmpty("separator");
+            Contract.Requires<ArgumentNullException>(obj != null);
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(separator));
             
             string[] array = obj.Cast<object>().Where(n => n != null).Select(n => n.ToString()).ToArray();
 

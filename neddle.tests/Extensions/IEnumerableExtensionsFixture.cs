@@ -2,7 +2,7 @@
 {
     // TODO: KLC implement
 
-    public class ObjectExtensionsFixture
+    public class IEnumerableExtensionsFixture
     {
        
     }

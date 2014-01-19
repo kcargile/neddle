@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Neddle.Extensions
 {
@@ -29,8 +30,8 @@ namespace Neddle.Extensions
         /// </returns>
         public static bool IsSubclassOfRawGeneric(this Type t, Type generic)
         {
-            t.CheckNull("t");
-            generic.CheckNull("generic");
+            Contract.Requires<ArgumentNullException>(t != null);
+            Contract.Requires<ArgumentNullException>(generic != null);
 
             if (t.IsInterface || t.IsValueType)
             {

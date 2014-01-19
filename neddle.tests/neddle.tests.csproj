@@ -58,8 +58,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extensions\DateTimeExtensionsFixture.cs" />
+    <Compile Include="Extensions\IEnumerableExtensionsFixture.cs" />
     <Compile Include="Extensions\ObjectExtensionsFixture.cs" />
-    <Compile Include="Extensions\StringExtensionsFixture.cs" />
     <Compile Include="Extensions\TypeExtensionsFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlideFixture.cs" />
