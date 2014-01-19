@@ -8,4 +8,3 @@ _ReSharper*
 *.idea
 packages
 *.dotCover
-*.DotSettings
