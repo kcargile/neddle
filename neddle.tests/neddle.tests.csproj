@@ -63,6 +63,7 @@
     <Compile Include="Extensions\TypeExtensionsFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlideFixture.cs" />
+    <Compile Include="Taxonomy\TagFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

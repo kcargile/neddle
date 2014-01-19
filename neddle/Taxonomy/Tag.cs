@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
@@ -10,7 +11,7 @@ namespace Neddle.Taxonomy
     [Serializable]
     [XmlRoot(ElementName = "tag")]
     [DataContract(Namespace = DefaultNamespace)]
-    public class Tag : NeddleObject<Tag>
+    public class Tag : NeddleObject<Tag>, ICloneable
     {
         /// <summary>
         /// Gets or sets the value.
@@ -21,6 +22,27 @@ namespace Neddle.Taxonomy
         [DataMember]
         [XmlText]
         public string Value { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Slide" /> class.
+        /// </summary>
+        /// <param name="title">The value.</param>
+        public Tag(string title) : this(Guid.NewGuid(), title)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Slide"/> class.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">The value.</param>
+        public Tag(Guid id, string value) : base(id)
+        {
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(value));
+
+            Value = value;
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -45,6 +67,17 @@ namespace Neddle.Taxonomy
             return
                 base.Equals(obj) &&
                 Value == obj.Value;
+        }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
+        public object Clone()
+        {
+            return Clone(this, new Tag(Value));
         }
     }
 }
