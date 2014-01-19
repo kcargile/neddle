@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+// TODO: KLC fix check clauses
+
 namespace Neddle.Extensions
 {
     /// <summary>
@@ -14,15 +16,15 @@ namespace Neddle.Extensions
         /// Returns a string for generic <see cref="IEnumerable"/> interface.
         /// </summary>
         /// <typeparam name="T"><see cref="Type"/> of the list's items.</typeparam>
-        /// <param name="source">The <see cref="IEnumerable"/> list.</param>
+        /// <param name="obj">The <see cref="IEnumerable"/> list.</param>
         /// <param name="separator">Separator string.</param>
         /// <returns>A string representation of the list delimeted by <b>seprator</b>.</returns>
-        public static string ToString<T>(this IEnumerable<T> source, string separator) where T : class
+        public static string ToString<T>(this IEnumerable<T> obj, string separator) where T : class
         {
-            source.CheckNull("source");
+            obj.CheckNull("obj");
             separator.CheckNullOrEmpty("separator");
 
-            string[] array = source.Where(n => n != null).Select(n => n.ToString()).ToArray();
+            string[] array = obj.Where(n => n != null).Select(n => n.ToString()).ToArray();
 
             return string.Join(separator, array);
         }
@@ -30,15 +32,15 @@ namespace Neddle.Extensions
         /// <summary>
         /// Returns a string for generic <see cref="IEnumerable"/> interface.
         /// </summary>
-        /// <param name="source">The <see cref="IEnumerable"/> list.</param>
+        /// <param name="obj">The <see cref="IEnumerable"/> list.</param>
         /// <param name="separator">Separator string.</param>
         /// <returns>A string representation of the list delimeted by <b>seprator</b>.</returns>
-        public static string ToString(this IEnumerable source, string separator)
+        public static string ToString(this IEnumerable obj, string separator)
         {
-            source.CheckNull("source");
+            obj.CheckNull("obj");
             separator.CheckNullOrEmpty("separator");
             
-            string[] array = source.Cast<object>().Where(n => n != null).Select(n => n.ToString()).ToArray();
+            string[] array = obj.Cast<object>().Where(n => n != null).Select(n => n.ToString()).ToArray();
 
             return string.Join(separator, array);
         }
@@ -46,28 +48,39 @@ namespace Neddle.Extensions
         /// <summary>
         /// Returns a conditional Where expression.
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
-        /// <param name="source">The source.</param>
+        /// <typeparam name="T">The type of the obj.</typeparam>
+        /// <param name="obj">The obj.</param>
         /// <param name="condition">if set to <c>true</c> [condition].</param>
         /// <param name="predicate">The predicate.</param>
         /// <returns>A where clause, iff the condition is <c>true</c>.</returns>
-        public static IEnumerable<TSource> WhereIf<TSource>(this IEnumerable<TSource> source, bool condition, Func<TSource, bool> predicate)
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> obj, bool condition, Func<T, bool> predicate)
         {
-            return condition ? source.Where(predicate) : source;
+            return condition ? obj.Where(predicate) : obj;
         }
 
         /// <summary>
         /// Determines whether the specified lists are equal.
         /// </summary>
-        /// <typeparam name="TU">The concrete type of the entities contained in the lists.</typeparam>
+        /// <typeparam name="T">The concrete type of the entities contained in the lists.</typeparam>
         /// <param name="list1">A list to compare.</param>
         /// <param name="list2">Another list to compare.</param>
         /// <returns>
         ///   <c>true</c> if the specified lists are equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public static bool NullSafeSequenceEquals<TU>(this IEnumerable<TU> list1, IEnumerable<TU> list2) where TU : NeddleObject<TU>
+        public static bool NullSafeSequenceEquals<T>(this IEnumerable<T> list1, IEnumerable<T> list2) where T : NeddleObject<T>
         {
             return ((null == list1 || null == list2) ? list1 == list2 : ((list1.Equals(list2)) | (list1.OrderBy(x => x.Id).SequenceEqual(list2.OrderBy(x => x.Id)))));
+        }
+
+        /// <summary>
+        /// Clones the specified collection, if it is not null.
+        /// </summary>
+        /// <typeparam name="T">Type of the items in the collection.</typeparam>
+        /// <param name="obj">The object.</param>
+        /// <returns>A list of cloned items or null.</returns>
+        public static IEnumerable<T> NullSafeClone<T>(this IEnumerable<T> obj) where T : NeddleObject<T>, ICloneable
+        {
+            return obj == null ? null : obj.Select(item => (T)item.Clone());
         }
     }
 }

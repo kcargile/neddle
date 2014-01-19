@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
@@ -10,7 +11,7 @@ namespace Neddle
     /// <summary>
     /// A section within a <see cref="Course" />.
     /// </summary>
-    public class Chapter : NeddleObject<Chapter>
+    public class Chapter : NeddleObject<Chapter>, ICloneable
     {
         /// <summary>
         /// Gets or sets the title.
@@ -117,5 +118,23 @@ namespace Neddle
                 Title == obj.Title &&
                 Slides.NullSafeSequenceEquals(obj.Slides);
         }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
+        public object Clone()
+        {
+            IEnumerable<Slide> slides = Slides.NullSafeClone();
+            Chapter clone = new Chapter(Title)
+            {
+                Slides = slides != null ? slides.ToList() : null
+            };
+
+            return Clone(this, clone);
+        }
     }
 }
+ 

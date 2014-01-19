@@ -12,7 +12,7 @@ namespace Neddle
     [Serializable]
     [XmlRoot("slide")]
     [DataContract(Namespace = DefaultNamespace)]
-    public class Slide : NeddleObject<Slide>
+    public class Slide : NeddleObject<Slide>, ICloneable
     {
         /// <summary>
         /// Gets or sets the title.
@@ -36,6 +36,15 @@ namespace Neddle
         public string Content { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Slide" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        public Slide(string title) : this(Guid.NewGuid(), title)
+        {
+
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Slide"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -45,15 +54,6 @@ namespace Neddle
             title.CheckNullOrEmpty("title");
 
             Title = title;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Slide" /> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        public Slide(string title) : this(Guid.NewGuid(), title)
-        {
-
         }
 
         /// <summary>
@@ -80,6 +80,22 @@ namespace Neddle
                 base.Equals(obj) &&
                 Title == obj.Title &&
                 Content == obj.Content;
+        }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
+        public object Clone()
+        {
+            Slide clone = new Slide(Title)
+            {
+                Content = Content
+            };
+
+            return Clone(this, clone);
         }
     }
 }

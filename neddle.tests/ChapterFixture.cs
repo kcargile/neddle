@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Neddle.Extensions;
 using Xunit;
 
 namespace Neddle.Tests
@@ -19,10 +20,7 @@ namespace Neddle.Tests
 
             Chapter chapter2 = new Chapter(chapter1.Id, "Chapter One")
             {
-                Slides = new List<Slide>
-                {
-                    chapter1.Slides.First()
-                }
+                Slides = chapter1.Slides.NullSafeClone().ToList()
             };
 
             Assert.Equal(chapter1, chapter2);

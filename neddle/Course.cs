@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
@@ -52,7 +53,7 @@ namespace Neddle
     [Serializable]
     [XmlRoot(ElementName = "course")]
     [DataContract(Namespace = DefaultNamespace)]
-    public class Course : NeddleObject<Course>
+    public class Course : NeddleObject<Course>, ICloneable
     {
         /// <summary>
         /// Gets or sets the name.
@@ -241,6 +242,27 @@ namespace Neddle
                 Tags.NullSafeSequenceEquals(obj.Tags) &&
                 ThumbnailImage.NullSafeEquals(obj.ThumbnailImage) &&
                 Version == obj.Version;
+        }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
+        public object Clone()
+        {
+            IEnumerable<Chapter> chapters = Chapters.NullSafeClone();
+            Course clone = new Course(Name, ShortName, Description)
+            {
+                Chapters = chapters != null ? chapters.ToList() : null,
+                Language = Language,
+                Tags = Tags,
+                ThumbnailImage = ThumbnailImage,
+                Version = Version
+            };
+
+            return Clone(this, clone);
         }
     }
 }

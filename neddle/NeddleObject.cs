@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Neddle.Extensions;
@@ -159,6 +160,26 @@ namespace Neddle
         {
             ValidationContext validationContext = new ValidationContext(this, null, null);
             Validator.ValidateObject(this, validationContext, true);
+        }
+
+        /// <summary>
+        /// Populates the target object's properties with values from the current instance.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
+        /// <returns>Chainable reference to <c>target</c>.</returns>
+        protected NeddleObject<T> Clone(NeddleObject<T> source, NeddleObject<T> target)
+        {
+            Contract.Requires<ArgumentNullException>(source != null);
+            Contract.Requires<ArgumentNullException>(target != null);
+
+            target.Id = source.Id;
+            target.CreatedDate = source.CreatedDate;
+            target.ModifiedDate = source.ModifiedDate;
+            target.CreatedBy = source.CreatedBy;
+            target.ModifiedBy = source.ModifiedBy;
+
+            return target;
         }
     }
 }
