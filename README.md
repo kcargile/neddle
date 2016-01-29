@@ -1,3 +1,5 @@
+[![Stories in Ready](https://badge.waffle.io/kcargile/neddle.svg?label=ready&title=Ready)](http://waffle.io/kcargile/neddle)
+
 Neddle is an open source, mobile ready, SCORM compliant learning management system (LMS) built on the .NET platform using C#. Neddle was created to address the absence of a truly high-quality, commercial grade LMS in the OSS community. 
 
 The project has several goals:
