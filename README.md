@@ -21,4 +21,4 @@ Visit the official project website at [http://www.neddle.org](http://www.neddle.
 ---
 Copyright, 2010-2016, Cargile Technology Group, LLC
 
-Released under the MIT license.
+Released under the GPL V3 license.
