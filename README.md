@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/kcargile/neddle.svg?label=ready&title=Ready)](http://waffle.io/kcargile/neddle)
+[![Build Status](https://travis-ci.org/kcargile/neddle.svg?branch=master)](https://travis-ci.org/kcargile/neddle) [![Stories in Ready](https://badge.waffle.io/kcargile/neddle.svg?label=ready&title=Ready)](http://waffle.io/kcargile/neddle)
 
 Neddle is an open source, mobile ready, standards-compliant learning management system (LMS) built using Node.js. Neddle was created to address the absence of a truly high-quality, commercial grade LMS in the OSS community. 
 
