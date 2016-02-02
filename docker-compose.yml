@@ -1,0 +1,10 @@
+--- 
+# Starts an environment suitable for local development.
+web: 
+  build: .
+  environment: 
+    - PASSENGER_APP_ENV=development
+    - NODE_ENV=development
+  ports: 
+    - "8000:8000"
+

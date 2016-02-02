@@ -1,0 +1,25 @@
+{
+  "name": "neddle",
+  "version": "0.1.0",
+  "description": "Neddle learning management system.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kcargile/neddle.git"
+  },
+  "keywords": [
+    "neddle",
+    "lms",
+    "training",
+    "learning management system"
+  ],
+  "author": "Kristopher Cargile <kristopher@cargiletech.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/kcargile/neddle/issues"
+  },
+  "homepage": "https://github.com/kcargile/neddle#readme"
+}

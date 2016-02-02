@@ -1,0 +1,9 @@
+docker-compose.yml
+.gitkeep
+README*
+*.sublime*
+.DS_Store
+.gitignore/*
+.git/*
+Makefile
+node_modules
