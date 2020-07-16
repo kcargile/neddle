@@ -12,7 +12,6 @@ The project has several goals:
 * Fit well with a wide variety of training paradigms, including corporate training, institutional teaching, and commercial services.
 * Build vibrant on- and off-line communities around that platform.
 * Keep installation, management, and use and use of the product by non-technical end users as simple as possible.
-* Support OSS CLR implementations, e.g. Mono.
 * Provide workable options for use in shared and cloud hosting environments.
 * Provide workable options for use with emerging cloud technologies, for example cloud-based NOSQL data stores.
 * Provide tight integration with various platform products and LOB systems; including content management systems, shopping cart applications, customer relationship management tools, and merchant gateway services.
